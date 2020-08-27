@@ -1,11 +1,29 @@
-import React from 'react';
-
-function Header (){
-    return(
-        <header>
-            <h1>Työpaikkoja Vantaalla</h1>
-        </header>
-    )
-}
-
-    export default Header
+import React from "react"; 
+import {Link} from 'react-router-dom'; 
+ 
+ 
+function Header(){ 
+    return( 
+        <header style={headerStyle}> 
+            <h1>Ajankohtaista Vantaalla</h1> 
+            <Link to="/" style ={linkStyle}> duunit </Link> | <Link to="/weather" style={linkStyle}>Säätiedot </Link> 
+        </header> 
+    ) 
+} 
+const linkStyle={ 
+    color: '#ffffff', 
+    textDecoration:'none' 
+} 
+ 
+ 
+ 
+const headerStyle ={ 
+    background:'#333333', 
+    color:'#ffffff', 
+    padding:'10px', 
+    align: 'center' 
+ 
+ 
+     
+} 
+export default Header 
