@@ -5,13 +5,14 @@ import {Link} from 'react-router-dom';
 function Header(){ 
     return( 
         <header style={headerStyle}> 
-            <h1>Ajankohtaista Vantaalla</h1> 
-            <Link to="/" style ={linkStyle}> duunit </Link> | <Link to="/weather" style={linkStyle}>Säätiedot </Link> 
+            <h1>Ajankohtaista Vantaalla</h1>
+            <h1>SB-PBLOCK</h1> 
+            <Link to="/" style={linkStyle}> duunit </Link> | <Link to="/weather" style={linkStyle}>Säätiedot </Link>
         </header> 
     ) 
 } 
 const linkStyle={ 
-    color: '#ffffff', 
+    color: '#FF0000', 
     textDecoration:'none' 
 } 
  
@@ -19,9 +20,9 @@ const linkStyle={
  
 const headerStyle ={ 
     background:'#333333', 
-    color:'#ffffff', 
+    color:'#FF0000', 
     padding:'10px', 
-    align: 'center' 
+    align: 'middle' 
  
  
      
