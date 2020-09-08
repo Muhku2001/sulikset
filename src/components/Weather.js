@@ -1,5 +1,5 @@
 import React from 'react'
-import { VictoryChart, VictoryLine } from 'victory'
+import { VictoryChart, VictoryLine, VictoryBar } from 'victory'
 
 
 function Weather() {
