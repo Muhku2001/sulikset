@@ -1,5 +1,5 @@
 import React from 'react'
-import { VictoryChart, VictoryLine, VictoryBar } from 'victory'
+import { VictoryChart, VictoryLine, VictoryStack, VictoryHistogram } from 'victory'
 
 
 function Weather() {
@@ -12,38 +12,51 @@ function Weather() {
 
     return (
     <div>    
-        <VictoryBar
-        data={data}
-        // data accessor for x values
-        x="quarter"
-        // data accessor for y values
-        y="earnings"
-      />
         <VictoryChart
-            domainPadding={{x:30, y:10}}
-                width={10000}
+                domainPadding={{x:30, y:10}}
+                width={1000}
                 height={250}>
-            <VictoryLine
-
-
-        
-        
+                <VictoryLine
             data={[
                 {experiment: "1.1.", actual: -10},
                 {experiment: "2.1.", actual: -5},
                 {experiment: "3.1.", actual: -0},
                 {experiment: "1.1.", actual: +5},
                 {experiment: "2.1.", actual: +10}
-                
             ]}
             style={{data:
                     {stroke: "green", strokeWidth: 1}
             }}
             x="experiment"
-            y="experiment"
+            y="actual"
         
         />
         </VictoryChart>
+        
+        <VictoryChart
+
+        domainPadding={{x:30, y:10}}
+                width={1000}
+                height={250}>
+                <VictoryLine
+            data={[
+                {experiment: "1.1.", actual: 0, label: '0%'},
+                {experiment: "2.1.", actual: 20, label: '20%'},
+                {experiment: "3.1.", actual: 40, label: '40%'},
+                {experiment: "4.1.", actual: 20, label: '20%'},
+                {experiment: "5.1.", actual: 80, label: '80%'}
+            ]}
+            style={{data:
+                    {stroke: "green", strokeWidth: 1}
+            }}
+            x="experiment"
+            y="actual"
+            />
+
+    
+        </VictoryChart>
+    
+        
         </div>
     )
 }
