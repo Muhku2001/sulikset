@@ -3,12 +3,21 @@ import { VictoryChart, VictoryLine, VictoryStack, VictoryArea, VictoryScatter, V
 
 
 function Weather() {
+  function convertUTDateToLocalDate(date){
+    now Date(date.getTime()+date.getTimezoneOffset()*60*1000);
+    return date;
+  }
+
+  // hakee päivämäärän.
   const today = new Date();
+  // rakentaa päivämäärän muotoon: päivä.kuukausi.vuosi
   const date = today.getDate() + "." + parseInt(today.getMonth() + 1) + "." + today.getFullYear();
 
+  //hakee sään
   const initWeather = [];
   const [weather, setWeather] = useState(initWeather);
 
+  //hakee kosteus/lämpö taulukon
   fetch('https://funcvariaiot.azurewebsites.net/api/HttpTriggerGetIotData?code=qO5qkShg0osHqY0BB2nfXI/anPgQ/K/3mIF7VTCFfaTdrvo6wl6DKw==&amount=50')
     .then(response => response.json())
     .then(json => setWeather([...json]));
@@ -19,27 +28,23 @@ function Weather() {
   let chartDataHum = [];
 
 
- 
+ //loop joka parseroi tietoja
   const rows = () => weather.slice(0, 24).reverse().map(temphum => {
-    const measurementDate = temphum.PublishedAt.split('T')[0].split('-')[2] +'.'+ temphum.PublishedAt.split('T')[0].split('-')[1] +'.'+temphum.PublishedAt.split('T')[0].split('-')[0]
-    const measurementTime = temphum.PublishedAt.split('T')[1].split(':')[0] +':'+ temphum.PublishedAt.split('T')[1].split(':')[1] 
+    const fixedTime = String(convertUTDateToLocalDate(now Date(temphum.PublishedAt)));
+    const measurementDate = temphum.PublishedAt.split('T')[0].split('-')[2] +'.'+ temphum.PublishedAt.split('T')[0].split('-')[1] +'.'+temphum.PublishedAt.split('T')[0].split('-')[0] 
+    const time = fixedTine.split(' ')[4].split(':')[0] + "." + fixedTime.split(' ')[4].split(':')[1];
     chartDataHum.push({experiment: String( measurementTime), actual: parseInt(temphum.Hum), label: String(temphum.Hum.split(".")[0]+"%")});
     chartDataTemp.push({experiment: String( measurementTime), actual: parseInt(temphum.Temp)  })
     chartTempDots.push({x: parseInt(humtempkey++), y: parseInt(temphum.Temp) })
     return <div key={humtempkey}><b>Pvm: </b>{measurementDate}, <b>klo</b> {measurementTime}--- <b>Ilmankosteus: </b>{temphum.Hum.split('.')[0]}%---<b>Lämpötila: </b>{temphum.Temp.split('.')[0]}°C</div>
                                               
   })
+  //lämpötila taulukko
   const showChartHum = chartDataHum;
- 
+
+ //kosteus taulukko
 const showChartTemp = chartDataTemp;
-/*
-const showTempDots = [
-  { x: 1, y: -10 },
-  { x: 2, y: -5 },
-  { x: 3, y: 0 },
-  { x: 4, y: +10 }
-]
-*/
+
 console.log(chartTempDots);
 const showTempDots = chartTempDots;
   return (
